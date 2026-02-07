@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Patron {
+    //set variables for Patron
     int id;
     String name;
     String address;
