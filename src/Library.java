@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,24 +43,68 @@ public class Library {
                 System.out.println("2. Edit address");
                 System.out.println("3. Edit fee");
                 int editEntry = scnr.nextInt();
+                scnr.nextLine();
                 if(editEntry == 1){
                     System.out.println("New name:");
-                    String newName = scnr.nextLine();
-                    p.name = newName;
+                    p.name = scnr.nextLine();
                 }
                 else if(editEntry == 2){
                     System.out.println("New address:");
-                    String newAddress = scnr.nextLine();
-                    p.address = newAddress;
+                    p.address = scnr.nextLine();
                 }
                 else if(editEntry == 3){
                     System.out.println("New fee:");
-                    double newFee = scnr.nextDouble();
-                    p.fee = newFee;
+                    p.fee = scnr.nextDouble();
                 }
                 break;
             }
         }
 
     }
+    public void showAllPatrons(){
+        System.out.println("Here are all patrons in LMS:");
+        if(patrons.isEmpty()){
+            System.out.println("No patrons to display");
+        }
+        else {
+            for (Patron p : patrons) {
+                System.out.println(p.id);
+                System.out.println(p.name);
+                System.out.println(p.address);
+                System.out.println(p.fee);
+            }
+        }
+    }
+
+    public void loadFromFile(){
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Enter file name");
+        String filename = scnr.nextLine();
+
+        try{
+            Scanner fileScnr = new Scanner(new File(filename));
+
+            while(fileScnr.hasNextLine()){
+                String line = fileScnr.nextLine();
+                String[] parts = line.split("-");
+                int id = Integer.parseInt(parts[0]);
+                String name = parts[1];
+                String address = parts[2];
+                double fee = Double.parseDouble(parts[3]);
+
+                patrons.add(new Patron(id, name, address, fee));
+                }
+
+            fileScnr.close();
+            System.out.println("Loaded patrons from file.");
+
+            } catch (Exception e) {
+            System.out.println("Error reading file.");
+        }
+
+    }
+
 }
+
+
+
