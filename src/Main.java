@@ -10,7 +10,7 @@ public class Main {
         Scanner scnr = new Scanner(System.in);
 //menu loops with while loop
         while (true) {
-            System.out.println("Welcome to your Library Management System!!");
+            System.out.println("*------------Welcome to your Library Management System!------------*");
             System.out.println("Please choose one:");
             System.out.println("1. Add patron");
             System.out.println("2. Remove patron");
@@ -19,8 +19,13 @@ public class Main {
             System.out.println("5. Load patron from file");
             System.out.println("6. Exit");
 
-//get user choice
+//get user choice with validation-- must be a number from the menu
+            while (!scnr.hasNextInt()) {
+                System.out.println("Enter a number from the menu:");
+                scnr.next();
+            }
             int choice = scnr.nextInt();
+
 
 //if else for each number choice
             if (choice == 1) {
